@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+- 2.7.6
+before_install:
+  - bundle lock --add-platform x86_64-linux
+
+script: 
+  - bin/rake db:migrate RAILS_ENV=test
+  - bundle exec rspec
