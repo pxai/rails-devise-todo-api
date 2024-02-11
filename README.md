@@ -56,7 +56,12 @@ curl -i -X POST -H "Content-Type: application/json" -H "x-myapi-token: TOKEN" ht
 
 Update a task:
 ```shell
-curl -i -X PUT -H "Content-Type: application/json" -H "x-myapi-token: TOKEN" http://127.0.0.1:3000/tasks/1 --data '{"name": "email3 referral 2", "active": "true"}'
+curl -i -X PUT -H "Content-Type: application/json" -H "x-myapi-token: TOKEN" http://127.0.0.1:3000/tasks/1 --data '{"name": "email3 referral 2", "completed": "true"}'
+```
+
+Delete One task
+```shell
+curl -i -X DELETE -H "Content-Type: application/json" -H "x-myapi-token:  TOKEN" http://127.0.0.1:3000/tasks/1
 ```
 
 Get One task

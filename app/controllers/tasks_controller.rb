@@ -21,6 +21,11 @@ class TasksController < ApplicationController
   end
 
   def edit
+    if @task
+      render json: @task
+    else
+      render json: { error: true, msg: 'Error updating Referral' }.to_json
+    end
   end
 
   def create
@@ -34,21 +39,32 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(task_params)
-      redirect_to @task, notice: 'Task was successfully updated.'
+    @task.name = params[:name]
+    @task.completed = params[:completed]
+
+    if @task.save
+      render json: @task
     else
-      render :edit
+      render json: @task.errors, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    if @task
+      @task.destroy
+      render json: @task
+    else
+      render json: {}, status: :unprocessable_entity
+    end
   end
 
   private
     def set_task
-      @task = @user.tasks.find(params[:id])
+      begin
+        @task = @user.tasks.find(params[:id])
+      rescue
+        @task = nil
+      end
     end
 
     def task_params
