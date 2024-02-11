@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   defaults format: :json do
     root to: "home#index"
     get '/', to: "home#index"
+    get '/data', to: "home#data"
+    get '/show/:id', to: "home#show"
     get '/restricted', to: 'restricted#index'
+    resources :tasks
     devise_for :users, controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks',
       sessions: 'users/sessions'

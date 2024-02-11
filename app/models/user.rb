@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
+  has_many :tasks
+  has_many :sessions
   def self.from_omniauth(auth)
     puts "USER: here we are #{auth.inspect}"
     user = User.where(email: auth.info.email).first

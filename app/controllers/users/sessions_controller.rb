@@ -12,14 +12,16 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  #def new
+    # super
+  #end
 
   # POST /resource/sign_in
-  # def create
+  def create
   #   super
-  # end
+  puts "#{'/'*80}\n Me cao go en todo!\n #{'/'*80}\n"
+  logged_in(current_user)
+ end
 
   # DELETE /resource/sign_out
   def destroy
@@ -28,6 +30,11 @@ class Users::SessionsController < Devise::SessionsController
      sign_out
      puts current_user.inspect
      render json: {msg: 'Session finished'}
+  end
+
+  def logged_in(user)
+    session = Session.create(user: current_user)
+    render json: { token: session.token }
   end
 
   # protected

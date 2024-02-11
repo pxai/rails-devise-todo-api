@@ -1,6 +1,7 @@
 class RestrictedController < ApplicationController
-    before_action :authenticate_user!
+    include CheckToken
+    prepend_before_action :check_token
     def index
         render json: {msg: 'ok, welcome to restricted'}
-    end 
+    end
 end
