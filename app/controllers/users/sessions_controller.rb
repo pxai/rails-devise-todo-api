@@ -19,7 +19,6 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
   #   super
-  puts "#{'/'*80}\n Me cao go en todo!\n #{'/'*80}\n"
   logged_in(current_user)
  end
 
@@ -34,7 +33,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def logged_in(user)
     session = Session.create(user: current_user)
-    render json: { token: session.token }
+    render json: { id: current_user.id, email: current_user.email, password: '', token: session.token.to_s }
   end
 
   # protected
